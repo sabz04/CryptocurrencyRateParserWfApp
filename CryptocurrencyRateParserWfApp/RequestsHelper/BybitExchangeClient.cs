@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace CryptocurrencyRateParserWfApp.RequestsHelper
 {
+    /// <summary>
+    /// Класс для взаимодействия с Bybit. Подробнее описал в BinanceExchangeClient
+    /// </summary>
     internal class BybitExchangeClient : IExchangeClient
     {
         private readonly BybitSocketClient socketClient;

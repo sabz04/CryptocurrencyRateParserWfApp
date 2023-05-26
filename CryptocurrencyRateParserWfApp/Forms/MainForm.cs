@@ -23,15 +23,21 @@ namespace CryptocurrencyRateParserWfApp.Forms
 {
     public partial class MainForm : Form
     {
-      
+      /// <summary>
+      /// api-ключи bybit
+      /// </summary>
         private readonly string apiKeyBybit = "ParBUwDl29ElWljUzO";
         private readonly string apiSecretBybit = "GjQVkBbWs8GKaJj8XpNRv1DH5ee2XIEZSwUu";
-
+        /// <summary>
+        /// api-ключи kucoin
+        /// </summary>
         private readonly string apiKeyKucoin = "646f973a96076a0001c4bcae";
         private readonly string apiSecretKucoin = "c6b110f4-3025-46dd-874c-30021e09c1b0";
         private readonly string apiPassKucoin = "878278";
 
-
+        /// <summary>
+        /// api-ключи binance
+        /// </summary>
         private readonly string apiKeyBinance= "bUdoFsQ05U9yOcp7APkAvQE9S54cuNTWt1jMjDMZxKSiNNeeKivmkzulPYnpY6DB";
         private readonly string apiSecretBinance = "URU6lMV5m42eoHfF8Oo41n5rwKG2CIaR3DGkB9DXNzVvwQjwbM0pjZxYGQJ73IP2";
         
@@ -56,7 +62,11 @@ namespace CryptocurrencyRateParserWfApp.Forms
         }
 
         
-
+        /// <summary>
+        /// Метод - обработчик события, который срабатывает при выборе пары валют.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SymbolsPairsComboBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if(pairedSymbols.Count < 1) { await LoadSymbols(); }
@@ -73,7 +83,10 @@ namespace CryptocurrencyRateParserWfApp.Forms
             await LoadRates(currentPair);
             
         }
-
+        /// <summary>
+        /// Метод для подгрузки всех пар валют.
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadSymbols()
         {
             var client = new BybitClient(new BybitClientOptions { ApiCredentials = new ApiCredentials(apiKeyBybit, apiSecretBybit) });
@@ -91,7 +104,12 @@ namespace CryptocurrencyRateParserWfApp.Forms
                 symbolsPairsComboBox.Items.Add(x.BaseAsset + x.QuoteAsset);
             });
         }
-
+        /// <summary>
+        /// Асинхронный метод, параллельно запускающий несколько тасков, принимает выбранную пару валют для отслеживания.
+        /// Запускает отслеживание валют. С помощью сокетов присоединяется напрямую к серверу, и подписываетя к конкретному событию.
+        /// </summary>
+        /// <param name="selectedSymbolPair"></param>
+        /// <returns></returns>
         private async Task LoadRates(SymbolPair selectedSymbolPair)
         {
             await Task.WhenAll(
@@ -117,7 +135,10 @@ namespace CryptocurrencyRateParserWfApp.Forms
         }
 
         
-
+        /// <summary>
+        /// Принимает объект-результат получаемых валют, срабатывают каждый раз при изменении курса валют
+        /// </summary>
+        /// <param name="data"></param>
         private void BinanceRatesResult(DataEvent<IBinance24HPrice> data)
         {
             var currentPrice = data.Data.LastPrice;
@@ -151,10 +172,6 @@ namespace CryptocurrencyRateParserWfApp.Forms
         }
     }
 
-    enum Exchange {
-        Binance, 
-        Kucoin,
-        Bybit 
-    }
+  
 
 }

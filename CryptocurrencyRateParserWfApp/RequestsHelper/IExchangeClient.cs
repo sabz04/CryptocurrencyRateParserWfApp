@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CryptocurrencyRateParserWfApp.RequestsHelper
 {
+    /// <summary>
+    /// Общий интерфейс для реализации классов Бирж
+    /// </summary>
     internal interface IExchangeClient
     {
         Task SubscribeToTickerUpdatesAsync<T>(SymbolPair symbolPair, Action<DataEvent<T>> handler);

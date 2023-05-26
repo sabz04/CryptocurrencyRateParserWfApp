@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace CryptocurrencyRateParserWfApp.RequestsHelper
 {
+    /// <summary>
+    /// Класс для взаимодействия с Kukoin. Подробнее описал в BinanceExchangeClient
+    /// </summary>
     internal class KucoinExchangeClient : IExchangeClient
     {
         private readonly KucoinSocketClient socketClient;
