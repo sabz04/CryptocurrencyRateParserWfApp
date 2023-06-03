@@ -2,6 +2,7 @@
 using Bybit.Net.Clients;
 using Bybit.Net.Objects;
 using Bybit.Net.Objects.Models.Socket.Spot;
+using CryptocurrencyRateParserWfApp.Configuration;
 using CryptocurrencyRateParserWfApp.Models;
 using CryptocurrencyRateParserWfApp.RequestsHelper;
 using CryptoExchange.Net.Authentication;
@@ -26,22 +27,6 @@ namespace CryptocurrencyRateParserWfApp.Forms
       /// <summary>
       /// api-ключи bybit
       /// </summary>
-        private readonly string apiKeyBybit = "ParBUwDl29ElWljUzO";
-        private readonly string apiSecretBybit = "GjQVkBbWs8GKaJj8XpNRv1DH5ee2XIEZSwUu";
-        /// <summary>
-        /// api-ключи kucoin
-        /// </summary>
-        private readonly string apiKeyKucoin = "646f973a96076a0001c4bcae";
-        private readonly string apiSecretKucoin = "c6b110f4-3025-46dd-874c-30021e09c1b0";
-        private readonly string apiPassKucoin = "878278";
-
-        /// <summary>
-        /// api-ключи binance
-        /// </summary>
-        private readonly string apiKeyBinance= "bUdoFsQ05U9yOcp7APkAvQE9S54cuNTWt1jMjDMZxKSiNNeeKivmkzulPYnpY6DB";
-        private readonly string apiSecretBinance = "URU6lMV5m42eoHfF8Oo41n5rwKG2CIaR3DGkB9DXNzVvwQjwbM0pjZxYGQJ73IP2";
-        
-
         private readonly BybitExchangeClient bybitExchageClient;
         private readonly KucoinExchangeClient kucoinExchageClient;
         private readonly BinanceExchangeClient binanceExchangeClient;
@@ -51,9 +36,9 @@ namespace CryptocurrencyRateParserWfApp.Forms
         {
             InitializeComponent();
 
-            bybitExchageClient = new BybitExchangeClient(apiKeyBybit, apiSecretBybit);
-            kucoinExchageClient = new KucoinExchangeClient(apiKeyKucoin, apiSecretKucoin, apiPassKucoin);
-            binanceExchangeClient = new BinanceExchangeClient(apiKeyBinance, apiSecretBinance);
+            bybitExchageClient = new BybitExchangeClient(ApiConfiguration.ApiKeyBybit, ApiConfiguration.ApiSecretBybit);
+            kucoinExchageClient = new KucoinExchangeClient(ApiConfiguration.ApiKeyKucoin, ApiConfiguration.ApiSecretKucoin, ApiConfiguration.ApiPassKucoin);
+            binanceExchangeClient = new BinanceExchangeClient(ApiConfiguration.ApiKeyBinance, ApiConfiguration.ApiSecretBinance);
 
             symbolsPairsComboBox.SelectedIndexChanged += SymbolsPairsComboBox_SelectedIndexChanged;
 
@@ -89,7 +74,7 @@ namespace CryptocurrencyRateParserWfApp.Forms
         /// <returns></returns>
         private async Task LoadSymbols()
         {
-            var client = new BybitClient(new BybitClientOptions { ApiCredentials = new ApiCredentials(apiKeyBybit, apiSecretBybit) });
+            var client = new BybitClient(new BybitClientOptions { ApiCredentials = new ApiCredentials(ApiConfiguration.ApiKeyBybit, ApiConfiguration.ApiSecretBybit) });
 
             var res = await client.SpotApiV1.ExchangeData.GetSymbolsAsync();
 
