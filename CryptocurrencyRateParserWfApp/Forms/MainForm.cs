@@ -24,15 +24,18 @@ namespace CryptocurrencyRateParserWfApp.Forms
 {
     public partial class MainForm : Form
     {
-      /// <summary>
-      /// api-ключи bybit
-      /// </summary>
+      
         private readonly IExchangeClient bybitExchageClient;
         private readonly IExchangeClient kucoinExchageClient;
         private readonly IExchangeClient binanceExchangeClient;
 
         private ExchangeCLientFactory exchangeClientFactory;
         private List<SymbolPair> pairedSymbols = new List<SymbolPair>();
+
+        /// <summary>
+        /// создание всех необходимых типов и упаковка в интерфейс, использовал фабрику, т.к посчитал возможным и нужным обобщение всех типов в интерфейс,
+        /// а также возможность расширения фабрики новыми классами бирж от того же разработчика J.Korf
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
