@@ -31,7 +31,7 @@ namespace CryptocurrencyRateParserWfApp.Forms
         private readonly IExchangeClient kucoinExchageClient;
         private readonly IExchangeClient binanceExchangeClient;
 
-        ExchangeCLientFactory exchangeClientFactory;
+        private ExchangeCLientFactory exchangeClientFactory;
         private List<SymbolPair> pairedSymbols = new List<SymbolPair>();
         public MainForm()
         {
@@ -43,10 +43,6 @@ namespace CryptocurrencyRateParserWfApp.Forms
             binanceExchangeClient = exchangeClientFactory.CreateClient(ExchangeType.Binance);
             kucoinExchageClient = exchangeClientFactory.CreateClient(ExchangeType.Kucoin);
 
-           /* bybitExchageClient = new BybitExchangeClient(ApiConfiguration.ApiKeyBybit, ApiConfiguration.ApiSecretBybit);
-            kucoinExchageClient = new KucoinExchangeClient(ApiConfiguration.ApiKeyKucoin, ApiConfiguration.ApiSecretKucoin, ApiConfiguration.ApiPassKucoin);
-            binanceExchangeClient = new BinanceExchangeClient(ApiConfiguration.ApiKeyBinance, ApiConfiguration.ApiSecretBinance);
-*/
             symbolsPairsComboBox.SelectedIndexChanged += SymbolsPairsComboBox_SelectedIndexChanged;
 
             SymbolsPairsComboBox_SelectedIndexChanged(null, null);

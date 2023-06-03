@@ -9,6 +9,11 @@ namespace CryptocurrencyRateParserWfApp.RequestsHelper
 {
     public class ExchangeCLientFactory : IExchangeClientFactory
     {
+        /// <summary>
+        /// Головной класс фабрики, позволяет выбрать и создать нужный тип.
+        /// </summary>
+        /// <param name="exchangeType"></param>
+        /// <returns></returns>
         public IExchangeClient CreateClient(ExchangeType exchangeType)
         {
             switch(exchangeType)
