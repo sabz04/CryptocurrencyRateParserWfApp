@@ -27,19 +27,26 @@ namespace CryptocurrencyRateParserWfApp.Forms
       /// <summary>
       /// api-ключи bybit
       /// </summary>
-        private readonly BybitExchangeClient bybitExchageClient;
-        private readonly KucoinExchangeClient kucoinExchageClient;
-        private readonly BinanceExchangeClient binanceExchangeClient;
+        private readonly IExchangeClient bybitExchageClient;
+        private readonly IExchangeClient kucoinExchageClient;
+        private readonly IExchangeClient binanceExchangeClient;
 
+        ExchangeCLientFactory exchangeClientFactory;
         private List<SymbolPair> pairedSymbols = new List<SymbolPair>();
         public MainForm()
         {
             InitializeComponent();
 
-            bybitExchageClient = new BybitExchangeClient(ApiConfiguration.ApiKeyBybit, ApiConfiguration.ApiSecretBybit);
+            exchangeClientFactory = new ExchangeCLientFactory();
+
+            bybitExchageClient = exchangeClientFactory.CreateClient(ExchangeType.Bybit);
+            binanceExchangeClient = exchangeClientFactory.CreateClient(ExchangeType.Binance);
+            kucoinExchageClient = exchangeClientFactory.CreateClient(ExchangeType.Kucoin);
+
+           /* bybitExchageClient = new BybitExchangeClient(ApiConfiguration.ApiKeyBybit, ApiConfiguration.ApiSecretBybit);
             kucoinExchageClient = new KucoinExchangeClient(ApiConfiguration.ApiKeyKucoin, ApiConfiguration.ApiSecretKucoin, ApiConfiguration.ApiPassKucoin);
             binanceExchangeClient = new BinanceExchangeClient(ApiConfiguration.ApiKeyBinance, ApiConfiguration.ApiSecretBinance);
-
+*/
             symbolsPairsComboBox.SelectedIndexChanged += SymbolsPairsComboBox_SelectedIndexChanged;
 
             SymbolsPairsComboBox_SelectedIndexChanged(null, null);

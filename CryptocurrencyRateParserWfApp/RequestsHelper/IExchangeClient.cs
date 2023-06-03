@@ -12,7 +12,7 @@ namespace CryptocurrencyRateParserWfApp.RequestsHelper
     /// <summary>
     /// Общий интерфейс для реализации классов Бирж
     /// </summary>
-    internal interface IExchangeClient
+    public interface IExchangeClient
     {
         Task SubscribeToTickerUpdatesAsync<T>(SymbolPair symbolPair, Action<DataEvent<T>> handler);
 
